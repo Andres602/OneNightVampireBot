@@ -28,5 +28,5 @@ python createDb.py
 python bot.py
 ```
 ## Logs
-### 24/03/2018, commit **"first commit"
+### 24/03/2018, commit **"first commit"**
 - Bot body divided into modules
