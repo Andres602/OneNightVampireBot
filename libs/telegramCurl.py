@@ -27,6 +27,13 @@ class telegramBot:
         content = storage.getvalue()
         return json.loads(content)
 
+    def uploadFile(self, method,options):
+        storage = StringIO()
+        self.c.setopt(self.c.URL,  self.url + method)
+        self.c.setopt(self.c.HTTPPOST, options)
+        self.c.perform()
+        return self.c.getinfo(pycurl.RESPONSE_CODE)
+        
     def getMe(self):
         return self.buildUrl("getMe") 
 
@@ -73,6 +80,14 @@ class telegramBot:
         post = self.buildUrl('answerCallbackQuery', message)
         return post
 
+    def sendFile(self,id,sendType,fileIn,caption=False):
+        field='voice' if sendType == 'sendVoice' else 'audio' if sendType == 'sendAudio' else 'document'
+        objetData = [("chat_id", str(id)), (field, (pycurl.FORM_FILE, fileIn))]
+        if caption:
+            objectData.append(("caption", caption))
+        post = self.uploadFile(sendType, objetData)
+        return post
+
     def makeKeyboard(self, keys,size,inline=False):
         i=0
         j=0
@@ -90,7 +105,7 @@ class telegramBot:
             j+=1
         if len(row):
             keyboard.append(row)
-        return json.dumps({'inline_keyboard': keyboard}) if inline else json.dumps({'keyboard': keyboard})
+        return json.dumps({'inline_keyboard': keyboard}) if inline else json.dumps({'keyboard': keyboard, 'one_time_keyboard':True, 'resize_keyboard':True})
 
 
 def main():
@@ -98,7 +113,7 @@ def main():
     print bot.getMe()
     bot.getUpdates()
     keys=bot.makeKeyboard([0,1,2,3,4,5],[1,5])
-    bot.sendMessage(5951788, "hola _Mundo_",keys)
+    print bot.sendFile(5951788, 'sendAudio','./files/4.Wav',"hola Mundo")
     bot.close()
 
 if __name__ == "__main__":

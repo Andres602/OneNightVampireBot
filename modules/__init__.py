@@ -1,0 +1,1 @@
+from configGame import *
