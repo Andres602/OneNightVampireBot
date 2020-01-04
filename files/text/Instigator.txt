@@ -1,0 +1,5 @@
+Despierta Instigator.
+
+Tú puedes intercambiar la marca de un jugador por la marca del traidor.
+
+El jugador que tenga esta marca solo puede ganar si otro jugador de su equipo muere.

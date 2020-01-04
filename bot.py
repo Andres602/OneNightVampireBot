@@ -24,7 +24,7 @@ class app:
         self.db = dbBot(config.get('database','host'),config.get('database','port'),config.get('database','id'))
         self.info=self.bot.getMe()
         self.updateId=False
-        self.configGame=configGame(self.bot, self.db, "Vampire",games.get('Vampire','card'),config.get('game','pageSize'))
+        self.configGame=configGame(self.bot, config.get('google','key'),self.db, "Vampire",games.get('Vampire','card'),config.get('game','pageSize'))
 
     def run(self):
         print("Bot {} iniciado".format(self.info['result']['username']))

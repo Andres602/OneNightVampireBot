@@ -1,0 +1,19 @@
+Despierten todos.
+
+En este momento pueden ver su marca; y solo su marca.
+
+No vean su carta.
+
+Rercueden lo siguiente.
+
+Quien tenga la marca Vampire es parte del equipo de los vampiros.
+
+Quien tenga la marca Fear no podra realizar su role en la etapa siguiente.
+
+Quienes voten por quien tiene la marca Diseased no pueden ganar el juego.
+
+Los que tienen la marca Love mueren si muere uno de ellos.
+
+El que tiene la marca Traitor solo puede ganar si alguien de su equipo muere.
+
+El asesino solo gana si muere el que tenga la marca Assassin.

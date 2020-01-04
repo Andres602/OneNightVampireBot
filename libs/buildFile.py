@@ -1,36 +1,57 @@
-from pydub import AudioSegment
-
-path="./files/mp3/"
-def buildFile(selection,fileOut,duration):
-    inFiles=[]
-    outFile="".join([path,'out/',fileOut,".mp3"])
+def buildFile2(selection):
+    path="./files/text/"
+    inFiles=""
+    sleep=""
+    end=""
+    with open("".join([path,"Begin",".txt"]),'r') as myfile:
+        inFiles = myfile.read()
+    with open("".join([path,"UndostresDormir.txt"]), 'r') as myfile:
+        sleep = myfile.read()
+    with open("".join([path,"End.txt"]), 'r') as myfile:
+        end = myfile.read()
+    cFile=None
+    vampires= False
     for name in selection:
-        if name in ['Vampire', 'The Count', 'The Master'] and "Renfield" in selection:
-            inFiles.append(path+'Vampires_Renfield.mp3')
-            if name ==  'The Count':
-                inFiles.append("".join([path,name,".mp3"]))
-        elif name in ['Vampire', 'The Count', 'The Master']:
-            inFiles.append(path+'Vampires.mp3')
-            if name ==  'The Count':
-                inFiles.append("".join([path,name,".mp3"]))
+        imMaster=False
+        if name in ['Vampire', 'The Count', 'The Master'] and not vampires:
+            vampires = True
+            imMaster = True if name == "The Master" else False
+            with open("".join([path,"Vampires",".txt"]),'r') as myfile:
+                cFile = myfile.read()
+            if "Renfield" in selection:
+                with open("".join([path,"Vampires_Renfield",".txt"]),'r') as myfile:
+                    cFile = cFile+myfile.read()
+                cFile=cFile+sleep
+                with open("".join([path,"Renfield",".txt"]),'r') as myfile:
+                    cFile = cFile+myfile.read()
+                selection.remove("Renfield")
+                if name ==  "The Count":
+                    cFile=cFile+sleep
+                    with open("".join([path,name,".txt"]),'r') as myfile:
+                        cFile = cFile+myfile.read()
         elif name == "Assassin" and "Apprentice Assassin" in selection:
-            inFiles.append(path+'Assasin_apprentince.mp3')
-        else:
-            inFiles.append("".join([path,name,".mp3"]))
-    inFiles=f7(inFiles)
-    print inFiles
-    inFiles.append("".join([path,"endCharacters.mp3"]))
-    inFiles.append("".join([path,duration,".mp3"]))
+            with open("".join([path,name,".txt"]),'r') as myfile:
+                cFile = myfile.read()
+            with open("".join([path,"Apprentice Assassin",".txt"]),'r') as myfile:
+                cFile = cFile+myfile.read()
+            selection.remove("Apprentice Assassin")
+        elif name == "Next" and "Cupid" in selection:
+            with open("".join([path,name,".txt"]),'r') as myfile:
+                cFile = myfile.read()
+            cFile=cFile+sleep
+            with open("".join([path,"Love",".txt"]),'r') as myfile:
+                cFile = cFile+myfile.read()
+        elif not name=="The Master":
+            with open("".join([path,name,".txt"]),'r') as myfile:
+                cFile = myfile.read()
+        if imMaster or not name=="The Master":
+            cFile=cFile+sleep
+            inFiles=inFiles+cFile
+    inFiles=inFiles+end
+    return inFiles
 
-    data=AudioSegment.from_mp3("".join([path,"begin.mp3"]))
-    for inFile in inFiles:
-        voice = AudioSegment.from_mp3(inFile)
-        data=data+voice
-    data.export(outFile, format="mp3")
-    print "archivo %s creado"%(fileOut)
-    return outFile
 
-def f7(seq):
-    seen = set()
-    seen_add = seen.add
-    return [x for x in seq if not (x in seen or seen_add(x))]
+if __name__ == "__main__":
+    characters=["Renfield","Apprentice Assassin","Next","Marksman"]
+    textOut=buildFile2(characters,path)
+    print textOut

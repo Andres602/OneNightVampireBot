@@ -1,0 +1,7 @@
+Despierta Diseased.
+
+Intercambia la marca  de Disease con la de otro jugador.
+
+Escuchen todos.
+
+Los jugadores que voten por Diseased o por el jugador que tenga la marca Disease no podrán ganar el juego.

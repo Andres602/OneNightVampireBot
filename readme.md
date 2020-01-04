@@ -3,7 +3,7 @@
 ## **NOTE: STILL IN DEVELOPMENT**
 
 ## Description
-A narrator bot for "One Nigth Vampire" game.
+A storyteller bot for "One Nigth Vampire" game.
 I used [anaconda](https://anaconda.org/) with python 2.7
 
 ## Requiriments
@@ -27,4 +27,9 @@ python bot.py
 - Bot body divided into modules
 
 ### 23/09/2018, commit **"version 1.0.0"**
-- Build narrator mp3 file 
+- Build storyteller mp3 file 
+
+### 01/03/2020, commit **"version 1.1.0"**
+- Change storyteller from mp3 files to google service
+- Remove mp3 files
+- Add txt files

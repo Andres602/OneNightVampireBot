@@ -1,0 +1,5 @@
+Despierta Assassin.
+
+Necesito que intercambies la marca  Assassin con la de otro jugador.
+
+Tu ganas el juego si y solo sí muere la persona que tenga esta marca.

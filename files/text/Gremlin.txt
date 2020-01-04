@@ -1,0 +1,7 @@
+Despierta Gremlin.
+
+Tu tienes la opción de intercambiar las cartas o las marcas de cualesquiera dos jugadores.
+
+Solo puedes intercambiar una de esas opciones.
+
+Y no puedes ver que cartas o marcas intercambiaste.

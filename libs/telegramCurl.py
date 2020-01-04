@@ -109,7 +109,7 @@ class telegramBot:
 
 
 def main():
-    bot = telegramBot('195327104:AAG2W1JvfrX224_e3fBFJkemfo3M0L4G3Bo')
+    bot = telegramBot('TELEGRAM TOKEN')
     print bot.getMe()
     bot.getUpdates()
     keys=bot.makeKeyboard([0,1,2,3,4,5],[1,5])

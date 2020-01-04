@@ -1,0 +1,13 @@
+Despierta Apprentice Assassin.
+
+En este momento maestro y alunmo se deben estar conociendo.
+
+Como aprendiz que eres solo podras ganar si tu maestro muere.
+
+Si no ves ningun Assassin despierto esto implica que tu eres el Assassin.
+
+En este caso necesito que intercambies la marca  Assassin con la de otro jugador.
+
+Solo podrás ganar el juego 
+
+Si y solo sí muere la persona que tenga esta marca.

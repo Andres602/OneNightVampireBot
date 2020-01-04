@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 from dataFilter import dataFilter
 from spanish import spanish
-from libs.buildFile import buildFile
+from libs.buildFile import buildFile2
+from libs.text2Voice import text2Voice
 
 class configGame:
-    def __init__(self, bot,db, nameGame,cards,pageSize):
+    def __init__(self, bot,googleApiKey,db, nameGame,cards,pageSize):
         self.bot=bot
         self.db=db
         self.cards=eval(cards)
@@ -12,6 +13,8 @@ class configGame:
         self.language=spanish()
         self.nameGame=nameGame
         self.pageSize=int(pageSize)
+        self.audioPath="./out/new_audio.mp3"
+        self.myVoice= text2Voice(googleApiKey,self.audioPath)
 
     def players(self, id, data, temp, jumpTo=False):
         """Set number of players"""
@@ -94,8 +97,10 @@ class configGame:
             if result.get('ok'):
                 print self.language.get('text','buildingGame')
                 game=self.db.getGame(temp['gameId'],self.nameGame)
-                fileOut=buildFile(game['characters'].split(","),"".join([temp['gameId'],self.nameGame]),game['duration'])
-                result=self.bot.sendFile(id,'sendAudio',fileOut)
+                storyteller=buildFile2(game['characters'].split(","))#fileOut=buildFile(game['characters'].split(","),"".join([temp['gameId'],self.nameGame]),game['duration'])
+                audio=self.myVoice.toVoice(storyteller)
+                self.myVoice.save_audio(audio["audioContent"])
+                result=self.bot.sendFile(id,'sendAudio',self.audioPath)
                 if result==200:
                     self.bot.sendMessage(id,self.language.get('text','gamReady'))
                     print self.language.get('text','gamReady')
@@ -136,11 +141,17 @@ class configGame:
         info=self.language.get('text','charactersOnGame')
         order=0
         newOrder=[]
+        needNext=True
         for i in range(len(self.cards)):
             card=self.cards[i]
+            if card['order']>10 and needNext:
+                newOrder.append("Next")
+                needNext=False
             if card['name'] in selected:
                 info="".join([info,'*%s. %s*(_%s_)   🔵\n%s\n\n'%(order+1,card['name'],card['team'],card['description'])])
                 newOrder.append(card['name'])
                 order=order+1
                 if order==len(selected): break
+        if needNext:
+            newOrder.append("Next")
         return info, newOrder
